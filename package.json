@@ -1,0 +1,36 @@
+{
+  "name": "low-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "pnpm --filter @low-code/client dev",
+    "dev:server": "pnpm --filter @low-code/server start:dev",
+    "dev:share": "pnpm --filter @low-code/share dev",
+    "build:client": "pnpm --filter @low-code/client build",
+    "build:server": "pnpm --filter @low-code/server build",
+    "build:share": "pnpm --filter @low-code/share build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.0.2",
+    "antd": "^5.27.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@7.1.12"
+    }
+  }
+}
