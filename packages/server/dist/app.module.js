@@ -8,16 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
+const user_module_1 = require("./user/user.module");
+const config_1 = require("@nestjs/config");
+const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        imports: [
+            user_module_1.UserModule,
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (config) => ({
+                    type: 'mysql',
+                    host: config.get('MYSQL_HOST'),
+                    port: config.get('MYSQL_PORT'),
+                    username: config.get('MYSQL_USER'),
+                    password: config.get('MYSQL_PASSWORD'),
+                    database: config.get('MYSQL_DATABASE'),
+                    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                    charset: 'utf8mb4',
+                    logging: true,
+                    autoLoadEntities: true,
+                    synchronize: true,
+                }),
+            }),
+        ],
+        controllers: [],
+        providers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
